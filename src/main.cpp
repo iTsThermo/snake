@@ -4,13 +4,17 @@
 
 void menu(){
     sf::RenderWindow window(sf::VideoMode({1080,720}), "Main Menu");
+
+    sf::Font ariel;
+    ariel.loadFromFile("../ARIAL.TTF");
     
     sf::Text start_text;
+    start_text.setFont(ariel);
     start_text.setString("Start");
     start_text.setFillColor(sf::Color::Red);
 
     sf::Text exit_text;
-    
+    exit_text.setFont(ariel);
     exit_text.setString("Exit");
     exit_text.setFillColor(sf::Color::Red);
     sf::RectangleShape start_button({100, 50});
@@ -37,11 +41,12 @@ void menu(){
 
         window.clear();
 
+        window.draw(exit_button);
+        window.draw(exit_text);
+
         window.draw(start_button);
         window.draw(start_text);
 
-        window.draw(exit_button);
-        window.draw(exit_text);
 
         window.display();
     }
