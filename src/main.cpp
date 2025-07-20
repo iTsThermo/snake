@@ -7,10 +7,11 @@ void menu(){
 
     sf::Color backgroundColor = sf::Color::Green;
 
-
+    // Import Arial font 
     sf::Font ariel;
     ariel.loadFromFile("../ARIAL.TTF");
 
+    // Create start, exit and main menu fonts
     sf::Text snake_menu_text;
     snake_menu_text.setFont(ariel);
     snake_menu_text.setString("SNAKE GAME");
@@ -26,12 +27,15 @@ void menu(){
     exit_text.setString("Exit");
     exit_text.setFillColor(sf::Color::Black);
 
+    // Create rectangles for buttons
     sf::RectangleShape start_button({100, 50});
     sf::RectangleShape exit_button({100, 50});
 
+    // Get window size 
     sf::Vector2u window_size = window.getSize();
     std::cout << std::endl <<"X:" << window_size.x << "Y:" << window_size.y;
 
+    // Set positions for nuttons, and text
     start_text.setPosition(window_size.x / 2.75, window_size.y / 2);
     start_button.setPosition(window_size.x / 2.75, window_size.y / 2);
     
@@ -49,6 +53,7 @@ void menu(){
                 window.close();
         }
 
+        // Set the background color
         window.clear(backgroundColor);
 
         window.draw(snake_menu_text);
