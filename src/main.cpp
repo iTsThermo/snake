@@ -1,10 +1,30 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <string>
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode({200, 200}), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+void menu(){
+    sf::RenderWindow window(sf::VideoMode({1080,720}), "Main Menu");
+    
+    sf::Text start_text;
+    start_text.setString("Start");
+    start_text.setFillColor(sf::Color::Red);
+
+    sf::Text exit_text;
+    
+    exit_text.setString("Exit");
+    exit_text.setFillColor(sf::Color::Red);
+    sf::RectangleShape start_button({100, 50});
+    sf::RectangleShape exit_button({100, 50});
+
+
+    sf::Vector2u window_size = window.getSize();
+    std::cout << std::endl <<"X:" << window_size.x << "Y:" << window_size.y;
+
+    start_button.setPosition(window_size.x / 2, window_size.y / 2);
+    start_text.setPosition(window_size.x / 2, window_size.y / 2);
+
+    exit_button.setPosition(window_size.x / 2.5, window_size.y / 2);
+    exit_text.setPosition(window_size.x / 2.5, window_size.y / 2);
 
     while (window.isOpen())
     {
@@ -16,7 +36,18 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+
+        window.draw(start_button);
+        window.draw(start_text);
+
+        window.draw(exit_button);
+        window.draw(exit_text);
+
         window.display();
     }
+}
+
+int main()
+{
+    menu();
 }
