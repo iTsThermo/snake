@@ -1,17 +1,24 @@
-#include <Button.h>
+#include "Button.h"
+#include <string>
 
-Button::Button(sf::Vector2f mouse_position)
+Button::Button(unsigned int x, unsigned int y, const std::string& text)
 {
     this->color_idle = sf::Color::White;
     this->color_hover = sf::Color::Red;
-    this->color_pressed = sf::Color::Black;
+    this->color_pressed = sf::Color::Blue;
+
+    this->text.setString(text);
+    this->text.setFillColor(sf::Color::Black);
+    this->font.loadFromFile("../ARIAL.TTF");
+    this->text.setFont(font);
+    this->text.setPosition(x / 3, y / 3);
 
     this->shape.setFillColor(this->color_idle);
 
     this->state = IDLE;
 
     this->shape.setSize({100,100});
-    this->shape.setPosition(mouse_position.x / 2, mouse_position.y / 2);
+    this->shape.setPosition(x / 3, y / 3);
 }
 
 Button::~Button()
@@ -52,4 +59,9 @@ void Button::update(const sf::RenderWindow &window)
 void Button::render(sf::RenderTarget &target)
 {
     target.draw(this->shape);
+}
+
+void Button::render_text(sf::RenderTarget &target)
+{
+    target.draw(this->text);
 }

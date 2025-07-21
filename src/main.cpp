@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
-#include <Button.h>
+#include "Button.h"
 
 void menu(){
     sf::RenderWindow window(sf::VideoMode({1080,720}), "Main Menu");
@@ -10,6 +10,7 @@ void menu(){
 
     // Import Arial font 
     sf::Font ariel;
+
     ariel.loadFromFile("../ARIAL.TTF");
 
     // Create start, exit and main menu fonts
@@ -45,26 +46,33 @@ void menu(){
 
     // snake_menu_text.setPosition(window_size.x / 2.25, window_size.y / 3);
 
-    sf::Vector2f mouse_pos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-    Button btn = Button(mouse_pos);
-    
+    sf::Vector2u window_pos = window.getSize();
+
+    Button start_btn = Button(window_pos.x, window_pos.y, "Start");
+    Button exit_btn = Button(window_pos.x + 500, window_pos.y, "Quit");
+
     while (window.isOpen())
-    {
+    { 
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
 
-            btn.update(window);
+            start_btn.update(window);
+            exit_btn.update(window);
         }
         
 
         // Set the background color
         window.clear(backgroundColor);
-        btn.render(window);
+        start_btn.render(window);
+        start_btn.render_text(window);
 
-        // window.draw(snake_menu_text);
+        exit_btn.render(window);
+        exit_btn.render_text(window);
+
+        window.draw(snake_menu_text);
 
         // window.draw(exit_button);
         // window.draw(start_button);
